@@ -6,8 +6,13 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-console_error_panic_hook = "0.1"
-dioxus = { version = "0.2", features = ["web"] }
+console_error_panic_hook = { version = "0.1", optional = true }
+dioxus = { version = "0.2", optional = true }
 tracing = "0.1"
-tracing-wasm = "0.2"
-wasm-bindgen = "0.2"    
+tracing-wasm = {version = "0.2", optional = true }
+wasm-bindgen = "0.2"
+
+[features]
+default = ["desktop"]
+web = ["console_error_panic_hook", "tracing-wasm", "dioxus", "dioxus/web"]
+desktop = ["dioxus", "dioxus/desktop"]
